@@ -14,7 +14,7 @@ namespace BinarySearchTree
         {
             if (Root == null)
             {
-                AddRootNode(nodeToAdd);
+                Root = nodeToAdd;
                 return;
             }
 
@@ -30,6 +30,7 @@ namespace BinarySearchTree
                         CurrentNode.RightChild = nodeToAdd;
                         return;
                     }
+                    CurrentNode = NextNode;
                 }
                 else if (nodeToAdd.Data < CurrentNode.Data)
                 {
@@ -39,6 +40,7 @@ namespace BinarySearchTree
                         CurrentNode.LeftChild = nodeToAdd;
                         return;
                     }
+                    CurrentNode = NextNode;
                 }
                 else if (nodeToAdd.Data == CurrentNode.Data)
                 {
@@ -48,9 +50,38 @@ namespace BinarySearchTree
             }
         }
 
-        private void AddRootNode(Node nodeToAdd)
+        public bool SearchNode(int nodeDataToFind)
         {
-            Root = nodeToAdd;
+            Node CurrentNode = Root;
+            Node NextNode;
+            while (true)
+            {
+                if (nodeDataToFind > CurrentNode.Data)
+                {
+                    NextNode = CurrentNode.RightChild;
+                    if (NextNode == null)
+                    {
+                        Console.WriteLine("Node not found in the tree!");
+                        return false;
+                    }
+                    CurrentNode = NextNode;
+                }
+                else if (nodeDataToFind < CurrentNode.Data)
+                {
+                    NextNode = CurrentNode.LeftChild;
+                    if (NextNode == null)
+                    {
+                        Console.WriteLine("Node not found in the tree!");
+                        return false;
+                    }
+                    CurrentNode = NextNode;
+                }
+                else if (nodeDataToFind == CurrentNode.Data)
+                {
+                    Console.WriteLine("Node exists in the tree!");
+                    return true;
+                }
+            }
         }
     }
 }
