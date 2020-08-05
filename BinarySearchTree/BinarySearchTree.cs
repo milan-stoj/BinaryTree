@@ -50,6 +50,8 @@ namespace BinarySearchTree
             }
         }
 
+        
+
         public bool SearchNode(int nodeDataToFind)
         {
             Node CurrentNode = Root;
